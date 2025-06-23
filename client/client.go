@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io"
 	"log"
 	"time"
 
@@ -29,6 +28,7 @@ func main() {
 	menuStream, err := c.GetMenu(ctx, &pb.MenuRequest{})
 
 	if err != nil {
+		cancel()
 		log.Fatalf("error calling function getMenu %s", err.Error())
 	}
 
@@ -37,19 +37,25 @@ func main() {
 	var items []*pb.Item
 
 	go func() {
-		for {
-			resp, err := menuStream.Recv()
-			if err == io.EOF {
-				done <- true
-				return
-			}
-			if err != nil {
-				log.Fatalf("cannot receive %v", err) // handle this error robustly without Fatalf as this is like api request, response
-			}
+		// for {
 
-			items = resp.Items
-			log.Println("Resp received ", items)
-		}
+		// resp, err := menuStream.Recv()
+		// if err == io.EOF {
+		// 	done <- true
+		// 	return
+		// }
+		// if err != nil {
+		// 	cancel()
+		// 	log.Fatalf("cannot receive %v", err) // handle this error robustly without Fatalf as this is like api request, response
+		// }
+
+		// items = resp.Items
+		// log.Println("Resp received ", items)
+		// }
+		items = append(items, menuStream.Items...)
+		// items = append(items, menuStream.RecvMsg())
+		log.Println("Resp items received are ", items)
+		done <- true
 	}()
 
 	<-done

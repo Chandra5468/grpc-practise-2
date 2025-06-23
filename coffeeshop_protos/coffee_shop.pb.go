@@ -311,10 +311,10 @@ const file_coffee_shop_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2\x10.coffeeshop.ItemR\x05items\"*\n" +
 	"\x04Item\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name2\xc0\x01\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name2\xbe\x01\n" +
 	"\n" +
-	"CoffeeShop\x128\n" +
-	"\aGetMenu\x12\x17.coffeeshop.MenuRequest\x1a\x10.coffeeshop.Menu\"\x000\x01\x126\n" +
+	"CoffeeShop\x126\n" +
+	"\aGetMenu\x12\x17.coffeeshop.MenuRequest\x1a\x10.coffeeshop.Menu\"\x00\x126\n" +
 	"\n" +
 	"PlaceOrder\x12\x11.coffeeshop.Order\x1a\x13.coffeeshop.Receipt\"\x00\x12@\n" +
 	"\x0eGetOrderStatus\x12\x13.coffeeshop.Receipt\x1a\x17.coffeeshop.OrderStatus\"\x00B:Z8github.com/Chandra5468/grpc-practise-2/coffeeshop_protosb\x06proto3"

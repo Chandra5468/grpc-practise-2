@@ -16,7 +16,7 @@ type server struct {
 	pb.UnimplementedCoffeeShopServer
 }
 
-func (s *server) GetMenu(menuRequest *pb.MenuRequest, srv pb.CoffeeShop_GetMenuServer) error {
+func (s *server) GetMenu(ctx context.Context, srv *pb.MenuRequest) (*pb.Menu, error) {
 	items := []*pb.Item{
 		{
 			Id:   "1",
@@ -32,13 +32,15 @@ func (s *server) GetMenu(menuRequest *pb.MenuRequest, srv pb.CoffeeShop_GetMenuS
 		},
 	}
 
-	for i, _ := range items {
-		srv.Send(&pb.Menu{ // Here we are doing streaming as mentioned in proto file
-			Items: items[0 : i+1],
-		})
-	}
+	// for i, _ := range items {
+	// 	srv.Send(&pb.Menu{ // Here we are doing streaming as mentioned in proto file
+	// 		Items: items[0 : i+1],
+	// 	})
+	// }
 
-	return nil
+	return &pb.Menu{
+		Items: items,
+	}, nil
 }
 func (s *server) PlaceOrder(ctx context.Context, order *pb.Order) (*pb.Receipt, error) {
 	return &pb.Receipt{
